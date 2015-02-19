@@ -7,8 +7,8 @@ import os
 import subprocess
 
 # reuse README as package long description
-with open('README.rst') as file:
-    long_description = file.read()
+with open('README.rst') as f:
+    long_description = f.read()
 
 try:
     import sys,commands,traceback,os
@@ -123,11 +123,12 @@ setup(name="isk-daemon",
       download_url = "http://www.imgseek.net/isk-daemon/download",
       platforms = ['Linux','Windows','Mac OSX'],
       cmdclass = { 'build_ext': fallible_build_ext},
+      package_dir = {'': 'src'},
       ext_modules = [
-        Extension("_imgdb",["imgSeekLib/imgdb.cpp",
-                           "imgSeekLib/haar.cpp",
-                           "imgSeekLib/imgdb.i",
-                           "imgSeekLib/bloom_filter.cpp"
+        Extension("_imgdb",["src/imgSeekLib/imgdb.cpp",
+                           "src/imgSeekLib/haar.cpp",
+                           "src/imgSeekLib/imgdb.i",
+                           "src/imgSeekLib/bloom_filter.cpp"
                                       ],
                   include_dirs = include_dirs,
                   library_dirs = library_dirs,
@@ -140,9 +141,9 @@ setup(name="isk-daemon",
       license = 'GPLv2',
       packages=['imgSeekLib', 'ui','plugins','core'],
       package_data={'imgSeekLib': ['*.so','*.pyd','*.dll'],
-                    'ui': find_data_files('ui/admin-www'),
+                    'ui': find_data_files('src/ui/admin-www'),
                     },
-      scripts= ['iskdaemon.py'],
+      scripts= ['src/iskdaemon.py'],
       install_requires = ['Twisted >= 8',
                           'simplejson',
                           'fpconst',
