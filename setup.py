@@ -112,7 +112,26 @@ def find_data_files(d):
     return matches
 
 print "#################################### Installing"
-setup(name="isk-daemon",
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+if on_rtd:
+    print "Hello, READTHEDOCS!"
+
+    setup(name="isk-daemon",
+          version='0.9.5',
+          description="Server and library for adding content-based (visual) image searching to any image related website or software.",
+          long_description=long_description,
+          keywords = "imgseek iskdaemon image cbir imagedatabase isk-daemon database searchengine",
+          author="Ricardo Niederberger Cabral",
+          author_email="ricardo.cabral at imgseek.net",
+          url="http://server.imgseek.net/",
+          download_url = "http://www.imgseek.net/isk-daemon/download",
+          platforms = ['Linux','Windows','Mac OSX'],
+          package_dir={'': 'src'},
+          license = 'GPLv2',
+          packages=['core']
+         )
+else:
+    setup(name="isk-daemon",
       version='0.9.5',
       description="Server and library for adding content-based (visual) image searching to any image related website or software.",
       long_description=long_description,
@@ -122,35 +141,35 @@ setup(name="isk-daemon",
       url="http://server.imgseek.net/",
       download_url = "http://www.imgseek.net/isk-daemon/download",
       platforms = ['Linux','Windows','Mac OSX'],
-      #cmdclass = { 'build_ext': fallible_build_ext},
+      cmdclass = { 'build_ext': fallible_build_ext},
       package_dir={'': 'src'},
-      #ext_modules = [
-      #  Extension("_imgdb",["src/imgSeekLib/imgdb.cpp",
-      #                     "src/imgSeekLib/haar.cpp",
-      #                     "src/imgSeekLib/imgdb.i",
-      #                     "src/imgSeekLib/bloom_filter.cpp"
-      #                                ],
-      #            include_dirs = include_dirs,
-      #            library_dirs = library_dirs,
-      #            extra_compile_args = extra_compile_args,
-      #            extra_link_args = extra_link_args,
-      #            libraries = libraries,
-      #            swig_opts = ['-c++']
-      #           )],
-      #py_modules = ['imgSeekLib.imgdb'],
+      ext_modules = [
+        Extension("_imgdb",["src/imgSeekLib/imgdb.cpp",
+                           "src/imgSeekLib/haar.cpp",
+                           "src/imgSeekLib/imgdb.i",
+                           "src/imgSeekLib/bloom_filter.cpp"
+                                      ],
+                  include_dirs = include_dirs,
+                  library_dirs = library_dirs,
+                  extra_compile_args = extra_compile_args,
+                  extra_link_args = extra_link_args,
+                  libraries = libraries,
+                  swig_opts = ['-c++']
+                 )],
+      py_modules = ['imgSeekLib.imgdb'],
       license = 'GPLv2',
-      packages=['core']#['imgSeekLib', 'ui','plugins','core'],
-      #package_data={'imgSeekLib': ['*.so','*.pyd','*.dll'],
-      #              'ui': find_data_files('src/ui/admin-www'),
-      #              },
-      #scripts= ['src/iskdaemon.py'],
-      #install_requires = ['Twisted >= 8',
-      #                    'simplejson',
-      #                    'fpconst',
-      #                    'SOAPpy',
-      #                    ],
-      #dependency_links = ["http://sourceforge.net/project/showfiles.php?group_id=26590&package_id=18246",
-      #                   ],
+      packages=['core', 'imgSeekLib', 'ui','plugins','core'],
+      package_data={'imgSeekLib': ['*.so','*.pyd','*.dll'],
+                    'ui': find_data_files('src/ui/admin-www'),
+                    },
+      scripts= ['src/iskdaemon.py'],
+      install_requires = ['Twisted >= 8',
+                          'simplejson',
+                          'fpconst',
+                          'SOAPpy',
+                          ],
+      dependency_links = ["http://sourceforge.net/project/showfiles.php?group_id=26590&package_id=18246",
+                         ],
      )
 
 print "See http://www.imgseek.net/isk-daemon/documents-1/usage for some next steps."
