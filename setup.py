@@ -112,8 +112,8 @@ def find_data_files(d):
     return matches
 
 print "#################################### Installing"
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
-if on_rtd:
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True' # Readthedocs.org sets that EnvVar, so there is alternate setup configuration for its builder.
+if on_rtd:  #  RTD builder can't build C++ extensions and have not any prerequisites, so we feed it only with bare module that needs to be autodoced.
     print "Hello, READTHEDOCS!"
 
     setup(name="isk-daemon",
@@ -163,6 +163,7 @@ else:
                     'ui': find_data_files('src/ui/admin-www'),
                     },
       scripts= ['src/iskdaemon.py'],
+      include_package_data = True,
       install_requires = ['Twisted >= 8',
                           'simplejson',
                           'fpconst',

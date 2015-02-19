@@ -32,8 +32,8 @@ import os
 import statistics
 from urldownloader import urlToFile
 import settings
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
-if not on_rtd:
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'  # Whether this module is imported by readthedocs.org builder
+if not on_rtd:  # If so, disable loading any extension modules RTC can't hadle
     from imgSeekLib.ImageDB import ImgDB
 
 # Globals
@@ -46,7 +46,7 @@ iskVersion = "0.9.5"
 # misc daemon inits
 rootLog = logging.getLogger('imgdbapi')
 rootLog.info('+- Initializing isk-daemon server (version %s) ...' % iskVersion)
-if not on_rtd:
+if not on_rtd:  # Again, disable this for RTD builder. All it needs are only docstrings.
     imgDB = ImgDB(settings)
     imgDB.loadalldbs(os.path.expanduser(settings.core.get('database', 'databasePath')))
 
