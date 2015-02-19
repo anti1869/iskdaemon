@@ -622,7 +622,7 @@ def queryImgIDFastKeywords(dbId, imgId, numres, kwJoinType, keywords):
     :type  imgId: number
     :param imgId: Target image id. If '0', random images containing the target keywords will be returned.
     :type  numres: number
-    :param numres Number of results desired
+    :param numres: Number of results desired
     :type  kwJoinType: number
     :param kwJoinType: logical operator for keywords: 1 for AND, 0 for OR
     :type  keywords: string

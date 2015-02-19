@@ -80,8 +80,14 @@ Help on improving this software is needed, feel free to submit patches to either
 
 Money donations are also welcome:
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=rnc000&url=https://github.com/ricardocabral/iskdaemon&title=iskdaemon&language=en_GB&tags=github&category=software)
+Flattr this git repo
+
+.. image:: https://api.flattr.com/button/flattr-badge-large.png
+    :target: https://flattr.com/submit/auto?user_id=rnc000&url=https://github.com/ricardocabral/iskdaemon&title=iskdaemon&language=en_GB&tags=github&category=software
+
+
 
 Or 
 
-[Donate using PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=J7XSCK2JNJB52&lc=US&item_name=imgSeek%20project&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
+.. image:: https://dl.dropbox.com/u/2451120/donate-with-paypal.png
+    :target: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=J7XSCK2JNJB52&lc=US&item_name=imgSeek%20project&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted

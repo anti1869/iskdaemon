@@ -7,7 +7,7 @@ import os
 import subprocess
 
 # reuse README as package long description
-with open('README.txt') as file:
+with open('README.rst') as file:
     long_description = file.read()
 
 try:
