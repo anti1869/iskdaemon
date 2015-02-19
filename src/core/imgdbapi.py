@@ -32,7 +32,7 @@ import os
 import statistics
 from urldownloader import urlToFile
 import settings
-from imgSeekLib.ImageDB import ImgDB
+#from imgSeekLib.ImageDB import ImgDB
 
 # Globals
 remoteCache = None    # global remote cache (memcached) singleton
@@ -44,8 +44,8 @@ iskVersion = "0.9.5"
 # misc daemon inits
 rootLog = logging.getLogger('imgdbapi')
 rootLog.info('+- Initializing isk-daemon server (version %s) ...' % iskVersion)
-imgDB = ImgDB(settings)
-imgDB.loadalldbs(os.path.expanduser(settings.core.get('database', 'databasePath')))
+#imgDB = ImgDB(settings)
+#imgDB.loadalldbs(os.path.expanduser(settings.core.get('database', 'databasePath')))
 
 rootLog.info('| image database initialized')
 
