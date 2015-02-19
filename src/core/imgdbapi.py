@@ -21,12 +21,9 @@
 #
 ###############################################################################
 
-__doc__ = '''
-@undocumented:  getClusterKeywords getClusterDb getKeywordsPopular getKeywordsVisualDistance getIdsBloomFilter
- '''
-
-# More epydoc fields:
-# http://epydoc.sourceforge.net/manual-fields.html
+# Undocumented members declaration moved to /docs/api.rst
+# Now using Sphinx as autodoc builder for Read The Docs (as it's most popular at the moment).
+# See http://sphinx-doc.org and https://readthedocs.org
 
 import time
 import logging
@@ -59,21 +56,21 @@ def queryImgID(dbId, id, numres=12, sketch=0, fast=False):
     """
     Return the most similar images to the supplied one. The supplied image must be already indexed, and is referenced by its ID.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  id: number
-    @param id: Target image id.
-    @type  numres: number
-    @param numres: Number of results to return. The target image is on the result list.
-    @type  sketch: number
-    @param sketch: 0 for photographs, 1 for hand-sketched images or low-resolution vector images. 
-    @type fast: boolean
-    @param fast: if true, only the average color for each image is considered. Image geometry/features are ignored. Search is faster this way.
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id: number
+    :param id: Target image id.
+    :type  numres: number
+    :param numres: Number of results to return. The target image is on the result list.
+    :type  sketch: number
+    :param sketch: 0 for photographs, 1 for hand-sketched images or low-resolution vector images.
+    :type fast: boolean
+    :param fast: if true, only the average color for each image is considered. Image geometry/features are ignored. Search is faster this way.
 
-    @rtype:   array
-    @since: 0.7
-    @change: 0.9.3: added parameter 'sketch'
-    @return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
+    :rtype:   array
+    :since: 0.7
+    :change: 0.9.3: added parameter 'sketch'
+    :return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
     """    
     dbId = int(dbId)
     id = int(id)
@@ -99,20 +96,20 @@ def queryImgBlob(dbId, data, numres=12, sketch=0, fast=False):
     """
     Return the most similar images to the supplied one. The target image is specified by its raw binary file data. Most common formats are supported.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  data: binary data
-    @param data: Target image file binary data.
-    @type  numres: number
-    @param numres: Number of results to return. The target image is on the result list.
-    @type  sketch: number
-    @param sketch: 0 for photographs, 1 for hand-sketched images or low-resolution vector images. 
-    @type fast: boolean
-    @param fast: if true, only the average color for each image is considered. Image geometry/features are ignored. Search is faster this way.
-    @rtype:   array
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  data: binary data
+    :param data: Target image file binary data.
+    :type  numres: number
+    :param numres: Number of results to return. The target image is on the result list.
+    :type  sketch: number
+    :param sketch: 0 for photographs, 1 for hand-sketched images or low-resolution vector images. 
+    :type fast: boolean
+    :param fast: if true, only the average color for each image is considered. Image geometry/features are ignored. Search is faster this way.
+    :rtype:   array
     
-    @since: 0.9.3
-    @return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
+    :since: 0.9.3
+    :return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
     """    
     dbId = int(dbId)
     numres = int(numres)
@@ -123,20 +120,20 @@ def queryImgPath(dbId, path, numres=12, sketch=0, fast=False):
     """
     Return the most similar images to the supplied one. The target image is specified using it's full path on the server filesystem.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  path: string
-    @param path: Target image pth on the server disk.
-    @type  numres: number
-    @param numres: Number of results to return. The target image is on the result list.
-    @type  sketch: number
-    @param sketch: 0 for photographs, 1 for hand-sketched images or low-resolution vector images. 
-    @type fast: boolean
-    @param fast: if true, only the average color for each image is considered. Image geometry/features are ignored. Search is faster this way.
-    @rtype:   array
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  path: string
+    :param path: Target image pth on the server disk.
+    :type  numres: number
+    :param numres: Number of results to return. The target image is on the result list.
+    :type  sketch: number
+    :param sketch: 0 for photographs, 1 for hand-sketched images or low-resolution vector images. 
+    :type fast: boolean
+    :param fast: if true, only the average color for each image is considered. Image geometry/features are ignored. Search is faster this way.
+    :rtype:   array
     
-    @since: 0.9.3
-    @return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
+    :since: 0.9.3
+    :return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
     """    
     dbId = int(dbId)
     numres = int(numres)
@@ -147,16 +144,16 @@ def addImgBlob(dbId, id, data):
     """
     Add image to database space. Image data is passed directly. It is then processed and indexed. 
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  id: number
-    @param id: Target image id. The image located on filename will be indexed and from now on should be refered to isk-daemon as this supplied id.
-    @type  data: binary 
-    @param data: Image binary data
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id: number
+    :param id: Target image id. The image located on filename will be indexed and from now on should be refered to isk-daemon as this supplied id.
+    :type  data: binary 
+    :param data: Image binary data
+    :rtype:   number
     
-    @since: 0.9.3
-    @return:  1 in case of success.
+    :since: 0.9.3
+    :return:  1 in case of success.
     """
     dbId = int(dbId)
     id = int(id)
@@ -177,18 +174,18 @@ def addImg(dbId, id, filename, fileIsUrl=False):
     """
     Add image to database space. Image file is read, processed and indexed. After this indexing is done, image can be removed from file system.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  id: number
-    @param id: Target image id. The image located on filename will be indexed and from now on should be refered to isk-daemon as this supplied id.
-    @type  filename: string
-    @param filename: Physical full file path for the image to be indexed. Should be in one of the supported formats ('jpeg', 'jpg', 'gif', 'png', 'rgb', 'pbm', 'pgm', 'ppm', 'tiff', 'tif', 'rast', 'xbm', 'bmp'). For better results image should have dimension of at least 128x128. Thumbnails are ok. Bigger images will be scaled down to 128x128.
-    @type  fileIsUrl: boolean
-    @param fileIsUrl: if true, filename is interpreted as an HTTP url and the remote image it points to downloaded and saved to a temporary location (same directory where database file is) before being added to database.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id: number
+    :param id: Target image id. The image located on filename will be indexed and from now on should be refered to isk-daemon as this supplied id.
+    :type  filename: string
+    :param filename: Physical full file path for the image to be indexed. Should be in one of the supported formats ('jpeg', 'jpg', 'gif', 'png', 'rgb', 'pbm', 'pgm', 'ppm', 'tiff', 'tif', 'rast', 'xbm', 'bmp'). For better results image should have dimension of at least 128x128. Thumbnails are ok. Bigger images will be scaled down to 128x128.
+    :type  fileIsUrl: boolean
+    :param fileIsUrl: if true, filename is interpreted as an HTTP url and the remote image it points to downloaded and saved to a temporary location (same directory where database file is) before being added to database.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  1 in case of success.
+    :since: 0.7
+    :return:  1 in case of success.
     """
     dbId = int(dbId)
     id = int(id)
@@ -217,12 +214,12 @@ def saveDb(dbId):
     Save the supplied database space if the it has already been saved with a filename (previous call to L{saveDbAs}).
     B{NOTE}: This operation should be used for exporting single database spaces. For regular server instance database persistance, use L{saveAllDbs} and L{loadAllDbs}.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  1 in case of success.
+    :since: 0.7
+    :return:  1 in case of success.
     """        
     dbId = int(dbId)
     return imgDB.savedb(dbId)
@@ -231,14 +228,14 @@ def saveDbAs(dbId, filename):
     """
     Save the supplied database space if the it has already been saved with a filename (subsequent save calls can be made to L{saveDb}).
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  filename: string
-    @param filename: Target filesystem full path of the file where data should be stored at. B{NOTE}: This data file contains a single database space and should be used for import/export purposes only. Do not try to load it with a call to L{loadAllDbs}.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  filename: string
+    :param filename: Target filesystem full path of the file where data should be stored at. B{NOTE}: This data file contains a single database space and should be used for import/export purposes only. Do not try to load it with a call to L{loadAllDbs}.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  1 in case of success.
+    :since: 0.7
+    :return:  1 in case of success.
     """
     dbId = int(dbId)
     return imgDB.savedbas(dbId, filename)
@@ -247,14 +244,14 @@ def loadDb(dbId, filename):
     """
     Load the supplied single-database-space-dump into a database space of given id. An existing database space with the given id will be completely replaced.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  filename: string
-    @param filename: Target filesystem full path of the file where data is stored at. B{NOTE}: This data file contains a single database space and should be used for import/export purposes only. Do not try to load it with a call to L{loadAllDbs} and vice versa.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  filename: string
+    :param filename: Target filesystem full path of the file where data is stored at. B{NOTE}: This data file contains a single database space and should be used for import/export purposes only. Do not try to load it with a call to L{loadAllDbs} and vice versa.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  dbId in case of success.
+    :since: 0.7
+    :return:  dbId in case of success.
     """    
     dbId = int(dbId)    
     return imgDB.loaddb(dbId, filename)
@@ -263,14 +260,14 @@ def removeImg(dbId, id):
     """
     Remove image from database space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  id: number
-    @param id: Target image id.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id: number
+    :param id: Target image id.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  1 in case of success.
+    :since: 0.7
+    :return:  1 in case of success.
     """    
     id = int(id)
     dbId = int(dbId)    
@@ -280,12 +277,12 @@ def resetDb(dbId):
     """
     Removes all images from a database space, frees memory, reset statistics.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  1 in case of success.
+    :since: 0.7
+    :return:  1 in case of success.
     """    
     dbId = int(dbId)    
     return imgDB.resetdb(dbId)
@@ -294,12 +291,12 @@ def createDb(dbId):
     """
     Create new db space. Overwrite database space statistics if one with supplied id already exists.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  dbId in case of success
+    :since: 0.7
+    :return:  dbId in case of success
     """    
     dbId = int(dbId)
     return imgDB.createdb(dbId)
@@ -308,10 +305,10 @@ def shutdownServer():
     """
     Request a shutdown of this server instance.
 
-    @rtype:   number
+    :rtype:   number
     
-    @since: 0.7
-    @return:  always M{1}
+    :since: 0.7
+    :return:  always M{1}
     """
     global hasShutdown
 
@@ -331,12 +328,12 @@ def getDbImgCount(dbId):
     """
     Return count of indexed images on database space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  image count
+    :since: 0.7
+    :return:  image count
     """    
     dbId = int(dbId)
     return imgDB.getImgCount(dbId)
@@ -345,14 +342,14 @@ def isImgOnDb(dbId, id):
     """
     Return whether image id exists on database space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  id: number
-    @param id: Target image id.
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id: number
+    :param id: Target image id.
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if image id exists
+    :since: 0.7
+    :return:  true if image id exists
     """    
     dbId = int(dbId)
     id = int(id)
@@ -362,14 +359,14 @@ def getImgDimensions(dbId, id):
     """
     Returns image original dimensions when indexed into database.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  id: number
-    @param id: Target image id.
-    @rtype:   array
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id: number
+    :param id: Target image id.
+    :rtype:   array
     
-    @since: 0.7
-    @return:  array in the form M{[width, height]}
+    :since: 0.7
+    :return:  array in the form M{[width, height]}
     """    
     dbId = int(dbId)
     id = int(id)
@@ -379,16 +376,16 @@ def calcImgAvglDiff(dbId, id1, id2):
     """
     Return average luminance (over three color channels) difference ratio
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  id1: number
-    @param id1: Target image 1 id.
-    @type  id2: number
-    @param id2: Target image 2 id.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id1: number
+    :param id1: Target image 1 id.
+    :type  id2: number
+    :param id2: Target image 2 id.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  float representing difference. The smaller, the most similar.
+    :since: 0.7
+    :return:  float representing difference. The smaller, the most similar.
     """    
     dbId = int(dbId)
     id1 = int(id1)
@@ -403,16 +400,16 @@ def calcImgDiff(dbId, id1,  id2):
 
     Comparing one image against itself is a degenerate case and the value returned should be ignored.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  id1: number
-    @param id1: Target image 1 id.
-    @type  id2: number
-    @param id2: Target image 2 id.
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id1: number
+    :param id1: Target image 1 id.
+    :type  id2: number
+    :param id2: Target image 2 id.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  float representing difference. The smaller, the most similar.
+    :since: 0.7
+    :return:  float representing difference. The smaller, the most similar.
     """    
     dbId = int(dbId)
     id1 = int(id1)
@@ -424,14 +421,14 @@ def getImgAvgl(dbId, id):
     """
     Return image average color levels on the three color channels (YIQ color system)
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  id: number
-    @param id: Target image id.
-    @rtype:   array of double
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id: number
+    :param id: Target image id.
+    :rtype:   array of double
     
-    @since: 0.7
-    @return:  values for YIQ color channels
+    :since: 0.7
+    :return:  values for YIQ color channels
     """    
     dbId = int(dbId)
     id1 = int(id)
@@ -441,10 +438,10 @@ def getDbList():
     """
     Return list defined database spaces.
 
-    @rtype:   array
+    :rtype:   array
     
-    @since: 0.7
-    @return:  array of db space ids
+    :since: 0.7
+    :return:  array of db space ids
     """    
     return imgDB.getDBList()
 
@@ -452,12 +449,12 @@ def getDbImgIdList(dbId):
     """
     Return list of image ids on database space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   array
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   array
     
-    @since: 0.7
-    @return:  array of image ids
+    :since: 0.7
+    :return:  array of image ids
     """    
     
     dbId = int(dbId)
@@ -467,10 +464,10 @@ def getDbDetailedList():
     """
     Return details for all database spaces.
 
-    @rtype:   map
+    :rtype:   map
     
-    @since: 0.7
-    @return:  map key is database space id (as an integer), associated value is array with [getImgCount,
+    :since: 0.7
+    :return:  map key is database space id (as an integer), associated value is array with [getImgCount,
                             queryCount,
                             lastQueryPerMin,
                             queryMinCount,
@@ -492,12 +489,12 @@ def saveAllDbsAs(path):
     """
     Persist all existing database spaces.
 
-    @type  path: string
-    @param path: Target filesystem full path of the file where data is stored at.
-    @rtype:   number
+    :type  path: string
+    :param path: Target filesystem full path of the file where data is stored at.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  total db spaces written
+    :since: 0.7
+    :return:  total db spaces written
     """    
     
     return imgDB.savealldbs(path)
@@ -507,16 +504,16 @@ def addKeywordImg(dbId, imgId, hash):
     """
     Adds a keyword to an image.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  imgId: number
-    @param imgId: Target image id.
-    @type  hash: number
-    @param hash: Keyword id.
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  imgId: number
+    :param imgId: Target image id.
+    :type  hash: number
+    :param hash: Keyword id.
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if operation was succesful
+    :since: 0.7
+    :return:  true if operation was succesful
     """
     dbId = int(dbId)
     imgId = int(imgId)
@@ -526,12 +523,12 @@ def getIdsBloomFilter(dbId):
     """
     Return bloom filter containing all images on given db id.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   bloom filter
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   bloom filter
     
-    @since: 0.7
-    @return:  bloom filter containing all images on given db id.
+    :since: 0.7
+    :return:  bloom filter containing all images on given db id.
     """
     dbId = int(dbId)
     return imgDB.getIdsBloomFilter(dbId)
@@ -540,12 +537,12 @@ def getClusterKeywords(dbId, numClusters,keywords):
     """
     Return whether image id exists on database space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if image id exists
+    :since: 0.7
+    :return:  true if image id exists
     """    
     dbId = int(dbId)
     return imgDB.getClusterKeywords(dbId, numClusters,keywords)
@@ -554,12 +551,12 @@ def getClusterDb(dbId, numClusters):
     """
     Return whether image id exists on database space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if image id exists
+    :since: 0.7
+    :return:  true if image id exists
     """    
     dbId = int(dbId)
     return imgDB.getClusterDb(dbId, numClusters)
@@ -568,12 +565,12 @@ def getKeywordsPopular(dbId, numres):
     """
     Return whether image id exists on database space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if image id exists
+    :since: 0.7
+    :return:  true if image id exists
     """    
     dbId = int(dbId)
     return imgDB.getKeywordsPopular(dbId, numres)
@@ -582,12 +579,12 @@ def getKeywordsVisualDistance(dbId, distanceType,  keywords):
     """
     Return whether image id exists on database space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if image id exists
+    :since: 0.7
+    :return:  true if image id exists
     """    
     dbId = int(dbId)
     return imgDB.getKeywordsVisualDistance(dbId, distanceType,  keywords)
@@ -596,18 +593,18 @@ def getAllImgsByKeywords(dbId, numres, kwJoinType, keywords):
     """
     Return all images with the given keywords
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  numres: number
-    @param numres Number of results desired
-    @type  kwJoinType: number
-    @param kwJoinType: Logical operator for target keywords: 1 for AND, 0 for OR
-    @type  keywords: string
-    @param keywords: comma separated list of keyword ids. An empty string will return random images.
-    @rtype:   array
-    
-    @since: 0.7
-    @return:  array of image ids
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  numres: number
+    :param numres: Number of results desired
+    :type  kwJoinType: number
+    :param kwJoinType: Logical operator for target keywords: 1 for AND, 0 for OR
+    :type  keywords: string
+    :param keywords: comma separated list of keyword ids. An empty string will return random images.
+    :rtype:   array
+
+    :since: 0.7
+    :return:  array of image ids
     """    
     dbId = int(dbId)
     keywordIds = [int(x) for x in keywords.split(',') if len(x) > 0]
@@ -620,20 +617,20 @@ def queryImgIDFastKeywords(dbId, imgId, numres, kwJoinType, keywords):
     """
     Fast query (only considers average color) for similar images considering keywords
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  imgId: number
-    @param imgId Target image id. If '0', random images containing the target keywords will be returned.
-    @type  numres: number
-    @param numres Number of results desired
-    @type  kwJoinType: number
-    @param kwJoinType: logical operator for keywords: 1 for AND, 0 for OR
-    @type  keywords: string
-    @param keywords: comma separated list of keyword ids.
-    @rtype:   array
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  imgId: number
+    :param imgId: Target image id. If '0', random images containing the target keywords will be returned.
+    :type  numres: number
+    :param numres Number of results desired
+    :type  kwJoinType: number
+    :param kwJoinType: logical operator for keywords: 1 for AND, 0 for OR
+    :type  keywords: string
+    :param keywords: comma separated list of keyword ids.
+    :rtype:   array
     
-    @since: 0.7
-    @return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
+    :since: 0.7
+    :return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
     """    
     dbId = int(dbId)
     imgId = int(imgId)
@@ -645,44 +642,45 @@ def queryImgIDKeywords(dbId, imgId, numres, kwJoinType, keywords):
     Query for similar images considering keywords. The input keywords are used for narrowing the
     search space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  imgId: number
-    @param imgId: Target image id. If '0', random images containing the target keywords will be returned.
-    @type  numres: number
-    @param numres: Number of results desired
-    @type  kwJoinType: number
-    @param kwJoinType: logical operator for keywords: 1 for AND, 0 for OR
-    @type  keywords: string
-    @param keywords: comma separated list of keyword ids. 
-    @rtype:   array
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  imgId: number
+    :param imgId: Target image id. If '0', random images containing the target keywords will be returned.
+    :type  numres: number
+    :param numres: Number of results desired
+    :type  kwJoinType: number
+    :param kwJoinType: logical operator for keywords: 1 for AND, 0 for OR
+    :type  keywords: string
+    :param keywords: comma separated list of keyword ids. 
+    :rtype:   array
     
-    @since: 0.7
-    @return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
+    :since: 0.7
+    :return:  array of arrays: M{[[image id 1, score],[image id 2, score],[image id 3, score], ...]} (id is Integer, score is Double)
     """    
     dbId = int(dbId)
     imgId = int(imgId)
     keywordIds = [int(x) for x in keywords.split(',') if len(x) > 0]
     return imgDB.queryImgIDKeywords(dbId, imgId, numres, kwJoinType, keywordIds)
 
+
 def mostPopularKeywords(dbId, imgs, excludedKwds, count, mode):
     """
     Returns the most frequent keywords associated with a given set of images 
 
-    @type  dbId: number
-    @param dbId Database space id.
-    @type  imgs: string
-    @param imgs: Comma separated list of target image ids
-    @type  excludedKwds: string
-    @param excludedKwds: Comma separated list of keywords ids to be excluded from the frequency count
-    @type  count: number
-    @param count Number of keyword results desired
-    @type  mode: number
-    @param mode: ignored, will be used on future versions.
-    @rtype:   array
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  imgs: string
+    :param imgs: Comma separated list of target image ids
+    :type  excludedKwds: string
+    :param excludedKwds: Comma separated list of keywords ids to be excluded from the frequency count
+    :type  count: number
+    :param count: Number of keyword results desired
+    :type  mode: number
+    :param mode: ignored, will be used on future versions.
+    :rtype:   array
     
-    @since: 0.7
-    @return:  array of keyword ids and frequencies: [kwd1_id, kwd1_freq, kwd2_id, kwd2_freq, ...]
+    :since: 0.7
+    :return:  array of keyword ids and frequencies: [kwd1_id, kwd1_freq, kwd2_id, kwd2_freq, ...]
     """    
     dbId = int(dbId)
     excludedKwds = [int(x) for x in excludedKwds.split(',') if len(x) > 0]
@@ -694,14 +692,14 @@ def getKeywordsImg(dbId, imgId):
     """
     Returns all keywords currently associated with an image.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  imgId: number
-    @param imgId: Target image id.
-    @rtype:   array
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  imgId: number
+    :param imgId: Target image id.
+    :rtype:   array
     
-    @since: 0.7
-    @return:  array of keyword ids
+    :since: 0.7
+    :return:  array of keyword ids
     """    
     dbId = int(dbId)
     imgId = int(imgId)
@@ -713,14 +711,14 @@ def removeAllKeywordImg(dbId, imgId):
     
     Known issue: keyword based queries will continue to consider the image to be associated to this keyword until the database is saved and restored.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  imgId: number
-    @param imgId: Target image id.
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  imgId: number
+    :param imgId: Target image id.
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if operation succeeded
+    :since: 0.7
+    :return:  true if operation succeeded
     """    
     dbId = int(dbId)
     imgId = int(imgId)
@@ -732,16 +730,16 @@ def removeKeywordImg(dbId, imgId, hash):
     
     Known issue: keyword based queries will continue to consider the image to be associated to this keyword until the database is saved and restored.    
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  imgId: number
-    @param imgId: Target image id.
-    @type  hash: number
-    @param hash: Keyword id.
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  imgId: number
+    :param imgId: Target image id.
+    :type  hash: number
+    :param hash: Keyword id.
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if operation succeeded
+    :since: 0.7
+    :return:  true if operation succeeded
     """    
     dbId = int(dbId)
     imgId = int(imgId)
@@ -751,16 +749,16 @@ def addKeywordsImg(dbId, imgId, hashes):
     """
     Associate keywords to image
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  imgId: number
-    @param imgId: Target image id.
-    @type  hashes: list of number
-    @param hashes: Keyword hashes to associate
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  imgId: number
+    :param imgId: Target image id.
+    :type  hashes: list of number
+    :param hashes: Keyword hashes to associate
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if image id exists
+    :since: 0.7
+    :return:  true if image id exists
     """    
     dbId = int(dbId)
     imgId = int(imgId)
@@ -770,16 +768,16 @@ def addDir(dbId, path, recurse):
     """
     Visits a directory recursively and add supported images into database space.
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @type  path: string
-    @param path: Target filesystem full path of the initial dir.
-    @type  recurse: number
-    @param recurse: 1 if should visit recursively
-    @rtype:   number
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  path: string
+    :param path: Target filesystem full path of the initial dir.
+    :type  recurse: number
+    :param recurse: 1 if should visit recursively
+    :rtype:   number
     
-    @since: 0.7
-    @return:  count of images succesfully added
+    :since: 0.7
+    :return:  count of images succesfully added
     """    
     
     dbId = int(dbId)
@@ -789,12 +787,12 @@ def loadAllDbsAs(path):
     """
     Loads from disk all previously persisted database spaces. (File resulting from a previous call to L{saveAllDbs}).
 
-    @type  path: string
-    @param path: Target filesystem full path of the file where data is stored at.
-    @rtype:   number
+    :type  path: string
+    :param path: Target filesystem full path of the file where data is stored at.
+    :rtype:   number
     
-    @since: 0.7
-    @return:  total db spaces read
+    :since: 0.7
+    :return:  total db spaces read
     """    
     
     return imgDB.loadalldbs(path)
@@ -803,10 +801,10 @@ def saveAllDbs():
     """
     Persist all existing database spaces on the data file defined at the config file I{settings.py}
 
-    @rtype:   number
+    :rtype:   number
     
-    @since: 0.7
-    @return:  count of persisted db spaces
+    :since: 0.7
+    :return:  count of persisted db spaces
     """
     
     return imgDB.savealldbs(settings.core.get('database','databasePath'))
@@ -815,10 +813,10 @@ def loadAllDbs():
     """
     Loads from disk all previously persisted database spaces on the data file defined at the config file I{settings.py}
 
-    @rtype:   number
+    :rtype:   number
     
-    @since: 0.7
-    @return:  count of persisted db spaces
+    :since: 0.7
+    :return:  count of persisted db spaces
     """    
     
     return imgDB.loadalldbs(settings.core.get('database','databasePath'))
@@ -827,10 +825,10 @@ def removeDb(dbid):
     """
     Remove a database. All images associated with it are also removed.
 
-    @rtype:   boolean
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  true if succesful
+    :since: 0.7
+    :return:  true if succesful
     """    
     
     return imgDB.removeDb(dbid)
@@ -839,10 +837,10 @@ def getGlobalServerStats():
     """
     Return the most similar images to the supplied one.
 
-    @rtype:   map
+    :rtype:   map
     
-    @since: 0.7
-    @return:  key is stat name, value is value. Keys are ['isk-daemon uptime', 'Number of databases', 'Total memory usage', 'Resident memory usage', 'Stack memory usage']
+    :since: 0.7
+    :return:  key is stat name, value is value. Keys are ['isk-daemon uptime', 'Number of databases', 'Total memory usage', 'Resident memory usage', 'Stack memory usage']
     """    
     
     stats = {}
@@ -859,12 +857,12 @@ def isValidDb(dbId):
     """
     Return whether database space id has already been defined
 
-    @type  dbId: number
-    @param dbId: Database space id.
-    @rtype:   boolean
+    :type  dbId: number
+    :param dbId: Database space id.
+    :rtype:   boolean
     
-    @since: 0.7
-    @return:  True if exists
+    :since: 0.7
+    :return:  True if exists
     """    
     
     dbId = int(dbId)
@@ -874,12 +872,12 @@ def getIskLog(window = 30):
     """
     Returns the last lines of text in the iskdaemon instance log
 
-    @type  window: number
-    @param window: number of lines to retrieve 
+    :type  window: number
+    :param window: number of lines to retrieve 
 
-    @rtype:   string
-    @return:  text block
-    @since: 0.9.3
+    :rtype:   string
+    :return:  text block
+    :since: 0.9.3
     """
     from utils import tail
     
