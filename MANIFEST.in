@@ -6,16 +6,16 @@ include test*
 recursive-include api-docs *
 recursive-include test *
 
-include imgSeekLib/*.h
+include src/iskdaemon/imgSeekLib/*.h
 
-include src/ui/admin-gwt/.project
-include src/ui/admin-gwt/.classpath
-recursive-include src/ui/admin-gwt/src *
-recursive-include src/ui/admin-www *
+include src/iskdaemon/ui/admin-gwt/.project
+include src/iskdaemon/ui/admin-gwt/.classpath
+recursive-include src/iskdaemon/ui/admin-gwt/src *
+recursive-include src/iskdaemon/ui/admin-www *
 recursive-include debian *
-prune src/ui/admin-gwt/war
-prune src/ui/admin-gwt/gwt-unitCache
-prune src/ui/admin-gwt/.gwt
+prune src/iskdaemon/ui/admin-gwt/war
+prune src/iskdaemon/ui/admin-gwt/gwt-unitCache
+prune src/iskdaemon/ui/admin-gwt/.gwt
 
 global-exclude *~
 global-exclude *.tmp

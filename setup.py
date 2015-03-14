@@ -11,7 +11,7 @@ with open('README.rst') as f:
     long_description = f.read()
 
 try:
-    import sys,commands,traceback,os
+    import sys, commands, traceback,os
     from distutils import sysconfig
     from distutils.core import setup,Extension
     from distutils.command.build_ext import build_ext
@@ -127,7 +127,7 @@ if on_rtd:  # Here is short setup config fot RTD
         author_email="ricardo.cabral at imgseek.net",
         package_dir={'': 'src'},
         license='GPLv2',
-        packages=['core']
+        packages=['iskdaemon.core']
     )
 else:  # And here is common setup for everybody else
     setup(
@@ -146,10 +146,10 @@ else:  # And here is common setup for everybody else
         ext_modules=[
             Extension(
                 "_imgdb", [
-                    "src/imgSeekLib/imgdb.cpp",
-                    "src/imgSeekLib/haar.cpp",
-                    "src/imgSeekLib/imgdb.i",
-                    "src/imgSeekLib/bloom_filter.cpp",
+                    "src/iskdaemon/imgSeekLib/imgdb.cpp",
+                    "src/iskdaemon/imgSeekLib/haar.cpp",
+                    "src/iskdaemon/imgSeekLib/imgdb.i",
+                    "src/iskdaemon/imgSeekLib/bloom_filter.cpp",
                     ],
                 include_dirs=include_dirs,
                 library_dirs=library_dirs,
@@ -158,12 +158,12 @@ else:  # And here is common setup for everybody else
                 libraries=libraries,
                 swig_opts=['-c++']
             )],
-        py_modules=['imgSeekLib.imgdb'],
+        py_modules=['iskdaemon.imgSeekLib.imgdb'],
         license='GPLv2',
-        packages=['imgSeekLib', 'ui', 'plugins', 'core'],
+        packages=['iskdaemon', 'iskdaemon.imgSeekLib', 'iskdaemon.core', 'iskdaemon.ui', 'iskdaemon.plugins'],
         package_data={
             'imgSeekLib': ['*.so', '*.pyd', '*.dll'],
-            'ui': find_data_files('src/ui/admin-www'),
+            'ui': find_data_files('src/iskdaemon/ui/admin-www'),
             },
         scripts=['src/isk-daemon.py'],
         include_package_data=True,

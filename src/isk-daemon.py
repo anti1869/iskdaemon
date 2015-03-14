@@ -27,12 +27,12 @@ import os
 import atexit
  
 # isk-daemon imports
-from core import settings
-from core.imgdbapi import *
-from core.facades import *
+from iskdaemon.core import settings
+from iskdaemon.core.imgdbapi import *
+from iskdaemon.core.facades import *
 
-from imgSeekLib import utils
-from imgSeekLib import daemonize
+from iskdaemon.imgSeekLib import utils
+from iskdaemon.imgSeekLib import daemonize
 
 # Globals
 rootLog = logging.getLogger('iskdaemon')
@@ -69,7 +69,7 @@ def startIskDaemon():
     from twisted.internet.error import CannotListenError
 
     # Serve UI
-    import ui 
+    from iskdaemon import ui
     _ROOT = os.path.join(os.path.dirname(ui.__file__),"admin-www")
     if not os.path.exists(_ROOT): # on Windows? Try serving from current file dir
         import sys
