@@ -30,6 +30,11 @@ Key features
 
 * Optimized image processing code (implemented in C++).
 
+Documentation
+--------------------
+
+Docs could be found here: http://isk-daemon.readthedocs.org
+
 Install instructions
 --------------------
 
