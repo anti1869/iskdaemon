@@ -165,7 +165,7 @@ else:  # And here is common setup for everybody else
             'imgSeekLib': ['*.so', '*.pyd', '*.dll'],
             'ui': find_data_files('src/ui/admin-www'),
             },
-        scripts=['src/iskdaemon.py'],
+        scripts=['src/isk-daemon.py'],
         include_package_data=True,
         install_requires=['Twisted >= 8',
                           'simplejson',
