@@ -33,8 +33,8 @@ public class Iskdaemon_admin implements EntryPoint, ValueChangeHandler<String> {
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
-	public static final String VERSION = "0.9.5";
-	public static final String RELEASEDATE = "Mar 2014";
+	public static final String VERSION = "0.10";
+	public static final String RELEASEDATE = "Mar 2015";
 	protected static String WEB_ENDPOINT = "/";
 	public static final String XMLRPC_BACKEND = WEB_ENDPOINT + "RPC";
 	protected static SinkList list = new SinkList();

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
+
 from setuptools import setup, find_packages
 
 # win/linux diffs
-import os
 import subprocess
 
 # reuse README as package long description
@@ -11,7 +11,7 @@ with open('README.rst') as f:
     long_description = f.read()
 
 try:
-    import sys, commands, traceback,os
+    import sys, commands, traceback, os
     from distutils import sysconfig
     from distutils.core import setup,Extension
     from distutils.command.build_ext import build_ext
@@ -23,6 +23,9 @@ except:
     print "Unable to import python distutils."
     print "You may want to install the python-dev package on your distribution."
     sys.exit(1)
+
+# This one is here to allow import of iskdaemon package before install
+sys.path.insert(0, "./src")
 
 ############## Init some vars
 
@@ -121,7 +124,7 @@ if on_rtd:  # Here is short setup config fot RTD
     print "Hello, READTHEDOCS!"
     setup(
         name="isk-daemon",
-        version='0.9.5',
+        version=__import__('iskdaemon').__version__,
         description="Server and library for adding content-based (visual) image searching to any image related website or software.",
         author="Ricardo Niederberger Cabral",
         author_email="ricardo.cabral at imgseek.net",
@@ -132,7 +135,7 @@ if on_rtd:  # Here is short setup config fot RTD
 else:  # And here is common setup for everybody else
     setup(
         name="isk-daemon",
-        version='0.9.5',
+        version=__import__('iskdaemon').__version__,
         description="Server and library for adding content-based (visual) image searching to any image related website or software.",
         long_description=long_description,
         keywords="imgseek iskdaemon image cbir imagedatabase isk-daemon database searchengine",
