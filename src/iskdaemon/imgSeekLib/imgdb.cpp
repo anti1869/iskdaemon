@@ -181,8 +181,8 @@ int addImageFromImage(const int dbId, const long int id, Image * image ) {
 	 */
 	GetExceptionInfo(&exception);
 
-	width = image->columns;
-	height = image->rows;
+	width = (int)image->columns;
+	height = (int)image->rows;
 
 	resize_image = SampleImage(image, 128, 128, &exception);
 
@@ -202,7 +202,7 @@ int addImageFromImage(const int dbId, const long int id, Image * image ) {
 
 	GetExceptionInfo(&exception);
 
-	const PixelPacket *pixel_cache = AcquireImagePixels(resize_image, 0, 0, 128, 128, &exception);
+	const PixelPacket *pixel_cache = GetVirtualPixels(resize_image, 0, 0, 128, 128, &exception);
 
 	for (int idx = 0; idx < 16384; idx++) {
 		rchan[idx] = pixel_cache->red;
@@ -541,7 +541,7 @@ int savedbtostream(const int dbId, std::ofstream& f) {
 	[int] image height
 
 	 */
-	int sz;
+	unsigned long sz;
 	long int id;
 
 	if (!validate_dbid(dbId)) { cerr << "ERROR: database space not found (" << dbId << ")" << endl; return 0;}
@@ -645,7 +645,7 @@ int savealldbs(char* filename) {
 	saveGlobalSerializationMetadata(f);
 
 	int res = 0;
-	int sz = dbSpace.size();
+	unsigned long sz = dbSpace.size();
 	f.write((char *) &(sz), sizeof(int)); // num dbs
 	int dbId;
 
@@ -853,7 +853,6 @@ std::vector<double>  queryImgBlob(const int dbId, const char* data,const long le
 	static Unit cdata1[16384];
 	static Unit cdata2[16384];
 	static Unit cdata3[16384];
-	int i;
 
 	Image *resize_image;
 
@@ -880,7 +879,7 @@ std::vector<double>  queryImgBlob(const int dbId, const char* data,const long le
 
 	GetExceptionInfo(&exception);
 
-	const PixelPacket *pixel_cache = AcquireImagePixels(resize_image, 0, 0, 128, 128, &exception);
+	const PixelPacket *pixel_cache = GetVirtualPixels(resize_image, 0, 0, 128, 128, &exception);
 
 	for (int idx = 0; idx < 16384; idx++) {
 		rchan[idx] = pixel_cache->red;
@@ -926,7 +925,6 @@ std::vector<double> queryImgPath(const int dbId, char* path,int numres,int sketc
 	static Unit cdata1[16384];
 	static Unit cdata2[16384];
 	static Unit cdata3[16384];
-	int i;
 
 	Image *resize_image;
 
@@ -953,7 +951,7 @@ std::vector<double> queryImgPath(const int dbId, char* path,int numres,int sketc
 
 	GetExceptionInfo(&exception);
 
-	const PixelPacket *pixel_cache = AcquireImagePixels(resize_image, 0, 0, 128, 128, &exception);
+	const PixelPacket *pixel_cache = GetVirtualPixels(resize_image, 0, 0, 128, 128, &exception);
 
 	for (int idx = 0; idx < 16384; idx++) {
 		rchan[idx] = pixel_cache->red;
@@ -1000,10 +998,10 @@ std::vector<double> queryImgID(const int dbId, long int id, int numres, int sket
 				}
 			}
 
-			if ( includedIds.count((*it).first) == 0 ) { // havent added this random result yet
+			if ( includedIds.count((const int)(*it).first) == 0 ) { // havent added this random result yet
 				Vres.insert(Vres.end(), (*it).first );
 				Vres.insert(Vres.end(), 0 );
-				includedIds.insert((*it).first);
+				includedIds.insert((const int)(*it).first);
 				++var;
 			}
 		}
@@ -1262,7 +1260,7 @@ std::vector<int> mostPopularKeywords(const int dbId, std::vector<long int> imgs,
 		KwdFrequencyStruct kf = pqKwds.top();
 		pqKwds.pop();
 		res.push_back(kf.kwdId);
-		res.push_back(kf.freq);
+		res.push_back((const int)kf.freq);
 		count--;
 	}
 
