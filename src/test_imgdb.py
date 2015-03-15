@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 ###############################################################################
@@ -23,8 +23,8 @@
 ###############################################################################
 
 import unittest
-from imgSeekLib.ImageDB import ImgDB 
-from core import settings
+from iskdaemon.imgSeekLib.ImageDB import ImgDB
+from iskdaemon.core import settings
 
 test_images_dir = 'test/data/'
 
@@ -259,10 +259,11 @@ class ImageDBTest(unittest.TestCase):
        
         # are image clones really scoring as very similar?
         dv = self.imgdb.queryImgID(1,6, 3)
+        ddv = dict(dv)  # You can't trust order of results to be the same every time, so using dict trick here
         self.assertEqual(4, len(dv))
-        self.assertEqual(8, dv[0][0]) 
-        self.assertEqual(6, dv[1][0])
-        self.assertEqual(19, dv[2][0]) 
+        self.assertTrue(8 in ddv and ddv[8] == 100.0)
+        self.assertTrue(6 in ddv and ddv[6] == 100.0)
+        self.assertTrue(19 in ddv)  # image id=19 is not a clone, but somehow got in list, although the score is low
 
         # query by path
         dv = self.imgdb.queryImgPath(1,test_images_dir+"DSC00007.JPG", 3)
