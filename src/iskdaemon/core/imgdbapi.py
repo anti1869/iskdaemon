@@ -709,6 +709,44 @@ def queryImgIDKeywords(dbId, imgId, numres, kwJoinType, keywords):
     return imgDB.queryImgIDKeywords(dbId, imgId, numres, kwJoinType, keywordIds)
 
 
+def queryImgIDKeywordsBulk(dbId, imgKwList, numres, kwJoinType):
+    """
+    Shortcut for querying for similar images considering keywords in bulk. You pass list of tuples::
+
+        [
+            (img1_id, 'kw1_id,kw2_id'),
+            (img2_id, 'kw3_id'),
+            ...
+        ]
+
+    In return you get list of results::
+
+        [
+            (img1_id, [(img2_id, img2_score), (img5_id, img5_score), ...]),
+            (img2_id, [(img16_id, img16_score), ...]),
+        ]
+
+    This will save you some network overhead over calling queryImgIDKeywords one-by-one.
+
+    :type  dbId: number
+    :param dbId: Database space id
+    :type imgKwList: tuple
+    :param imgKwList: List of queries in described format. Keywords is a comma-separated list of keyword ids.
+    :type  numres: number
+    :param numres: Number of results desired
+    :type  kwJoinType: number
+    :param kwJoinType: logical operator for keywords: 1 for AND, 0 for OR
+    :return: List of image ids and corresponding results in format, described above.
+    """
+
+    total_results = []
+    for image_id, keywords in imgKwList:
+        query_result = queryImgIDKeywords(dbId, image_id, numres, kwJoinType, keywords)
+        total_results.append((image_id, query_result))
+
+    return total_results
+
+
 def mostPopularKeywords(dbId, imgs, excludedKwds, count, mode):
     """
     Returns the most frequent keywords associated with a given set of images 
@@ -990,6 +1028,7 @@ CommonDatabaseFacadeFunctions = [
                                  removeAllKeywordImgBulk,
                                  getKeywordsImg,
                                  queryImgIDKeywords,
+                                 queryImgIDKeywordsBulk,
                                  queryImgIDFastKeywords,
                                  getAllImgsByKeywords,
                                  getKeywordsVisualDistance,
