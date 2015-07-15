@@ -523,6 +523,48 @@ def addKeywordImg(dbId, imgId, hash):
     imgId = int(imgId)
     return imgDB.addKeywordImg(dbId, imgId, hash)
 
+
+def addKeywordImgBulk(dbId, data):
+    """
+    Adds keywords to images in a bulk. You pass data as dict when keywords as keys and list of image id as values::
+
+        {
+            keyword1_id: [img1_id, img2_id],
+            keyword2_id: [img1_id, img3_id],
+            ...
+        }
+
+    This will save some network overhead.
+
+    :param dbId: id of the image database to use.
+    :param data: Keywords and list of image id in described format.
+    :return: True if all operations was successfull
+    """
+
+    result = True
+
+    for keyword, id_list in data.items():
+
+        # Convert keyword to int
+        try:
+            keyword_id = int(keyword)
+        except ValueError:
+            result &= False
+            continue
+
+        # Assign that keyword to images
+        for img in id_list:
+            try:
+                img_id = int(img)
+            except ValueError:
+                result &= False
+                continue
+
+            result &= addKeywordImg(dbId, img_id, keyword_id)
+
+    return bool(result)
+
+
 def getIdsBloomFilter(dbId):
     """
     Return bloom filter containing all images on given db id.
@@ -713,7 +755,8 @@ def removeAllKeywordImg(dbId, imgId):
     """
     Remove all keyword associations this image has.
     
-    Known issue: keyword based queries will continue to consider the image to be associated to this keyword until the database is saved and restored.
+    Known issue: keyword based queries will continue to consider the image to be associated
+    to this keyword until the database is saved and restored.
 
     :type  dbId: number
     :param dbId: Database space id.
@@ -727,6 +770,29 @@ def removeAllKeywordImg(dbId, imgId):
     dbId = int(dbId)
     imgId = int(imgId)
     return imgDB.removeAllKeywordImg(dbId, imgId)
+
+
+def removeAllKeywordImgBulk(dbId, imgIdList):
+    """
+    Remove all keyword associations for all images in list.
+
+    This is just convenience shortcut for removeAllKeywordImg being called in loop.
+    Saves network overhead, though.
+
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  imgIdList: list
+    :param imgIdList: List of target image id.
+    :rtype:   boolean
+
+    :since: 0.10
+    :return:  True if all calls succeeded
+    """
+    result = True
+    for img_id in imgIdList:
+        result &= removeAllKeywordImg(dbId, img_id)
+
+    return result
 
 def removeKeywordImg(dbId, imgId, hash):
     """
@@ -918,8 +984,10 @@ CommonDatabaseFacadeFunctions = [
                                  shutdownServer,
                                  addKeywordImg,
                                  addKeywordsImg,
+                                 addKeywordImgBulk,
                                  removeKeywordImg,
                                  removeAllKeywordImg,
+                                 removeAllKeywordImgBulk,
                                  getKeywordsImg,
                                  queryImgIDKeywords,
                                  queryImgIDFastKeywords,

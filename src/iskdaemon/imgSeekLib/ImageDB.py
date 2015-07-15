@@ -445,7 +445,7 @@ class ImgDB:
     
     @utils.requireKnownDbId
     @utils.dumpArgs    
-    def removeAllKeywordImg(self,dbId, imgId):
+    def removeAllKeywordImg(self, dbId, imgId):
         return imgdb.removeAllKeywordImg(dbId, imgId)
     
     @utils.requireKnownDbId
