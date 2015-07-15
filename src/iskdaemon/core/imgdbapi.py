@@ -260,6 +260,7 @@ def loadDb(dbId, filename):
     dbId = int(dbId)    
     return imgDB.loaddb(dbId, filename)
 
+
 def removeImg(dbId, id):
     """
     Remove image from database space.
@@ -276,6 +277,25 @@ def removeImg(dbId, id):
     id = int(id)
     dbId = int(dbId)    
     return imgDB.removeImg(dbId, id)
+
+
+def removeImgBulk(dbId, ids):
+    """
+    Neat shortcut to remove whole bunch of images from database.
+
+    :type  dbId: number
+    :param dbId: Database space id.
+    :type  id: list
+    :param idList: List of image ids.
+
+    :since: 0.10
+    :return: True if all images was removed.
+    """
+    result = True
+    for image_id in ids:
+        result &= removeImg(dbId, image_id)
+    return result
+
 
 def resetDb(dbId):
     """
@@ -538,6 +558,7 @@ def addKeywordImgBulk(dbId, data):
 
     :param dbId: id of the image database to use.
     :param data: Keywords and list of image id in described format.
+    :since: 0.10
     :return: True if all operations was successfull
     """
 
@@ -736,6 +757,7 @@ def queryImgIDKeywordsBulk(dbId, imgKwList, numres, kwJoinType):
     :param numres: Number of results desired
     :type  kwJoinType: number
     :param kwJoinType: logical operator for keywords: 1 for AND, 0 for OR
+    :since: 0.10
     :return: List of image ids and corresponding results in format, described above.
     """
 
@@ -999,6 +1021,7 @@ CommonDatabaseFacadeFunctions = [
                                  saveDb,
                                  loadDb,
                                  removeImg,
+                                 removeImgBulk,
                                  resetDb,
                                  removeDb,
                                  createDb,
