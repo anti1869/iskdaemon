@@ -215,26 +215,38 @@ class ImgDB:
             
     @utils.requireKnownDbId            
     @utils.dumpArgs    
-    def addDir(self, dbId, path, recurse):
+    def addDir(self, dbId, path, recurse, fname_as_id=False):
         
         path = safe_str(path)        
         
         addedCount = 0
         dbSpace = self.dbSpaces[dbId]
         if not os.path.isdir(path):
-            log.error("'%s' does not exist or is not a directory"%path)
+            log.error("'%s' does not exist or is not a directory" % path)
             return 0
         for fil in os.listdir(path):
             fil = safe_str(fil)
             fil = path + os.sep + fil 
             if len(fil) > 4 and fil.split('.')[-1].lower() in SUPPORTED_IMG_EXTS:
+                file_name = os.path.splitext(os.path.basename(fil))[0]
+                image_id = dbSpace.lastId
+
+                # If ``fname_as_id`` is True, try to retrieve image id from filename.
+                if fname_as_id:
+                    try:
+                        image_id = int(file_name)
+                    except ValueError:
+                        log.error("Can not get id from filename {}. Skipping".format(file_name))
+                        continue
+
+                # Add image to db
                 try:
-                    addedCount += self.addImage(dbId, fil, dbSpace.lastId)
+                    addedCount += self.addImage(dbId, fil, image_id)
                 except RuntimeError, e:
                     log.error(e)
-                continue
-            if recurse and os.path.isdir(fil):
-                addedCount += self.addDir(dbId, fil,recurse)
+
+            elif recurse and os.path.isdir(fil):
+                addedCount += self.addDir(dbId, fil, recurse, fname_as_id)
         return addedCount        
 
     @utils.requireKnownDbId

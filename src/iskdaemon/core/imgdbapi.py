@@ -768,7 +768,7 @@ def addKeywordsImg(dbId, imgId, hashes):
     imgId = int(imgId)
     return imgDB.addKeywordsImg(dbId, imgId, hashes)
 
-def addDir(dbId, path, recurse):
+def addDir(dbId, path, recurse, fname_as_id=False):
     """
     Visits a directory recursively and add supported images into database space.
 
@@ -778,6 +778,8 @@ def addDir(dbId, path, recurse):
     :param path: Target filesystem full path of the initial dir.
     :type  recurse: number
     :param recurse: 1 if should visit recursively
+    :type fname_as_id: bool
+    :param fname_as_id: Whether to use file names as id. If false, id will be assigned automatically.
     :rtype:   number
     
     :since: 0.7
@@ -785,7 +787,7 @@ def addDir(dbId, path, recurse):
     """    
     
     dbId = int(dbId)
-    return imgDB.addDir(dbId, path, recurse)
+    return imgDB.addDir(dbId, path, recurse, fname_as_id)
 
 def loadAllDbsAs(path):
     """
